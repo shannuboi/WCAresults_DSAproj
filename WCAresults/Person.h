@@ -1,4 +1,5 @@
 #include <string>
+#include "LinkedList.h"
 
 class Person
 {
@@ -7,9 +8,12 @@ public:
     std::string GetName() const;
     std::string GetCountry() const;
     std::string GetPersonId() const;
+    void AddCompetion(const std::string& compID);
+    const LinkedList<std::string>& GetCompIds() const;
 private:
     std::string name;
     std::string country;
     std::string personId;
+    LinkedList<std::string> competitionIds;
 };
 

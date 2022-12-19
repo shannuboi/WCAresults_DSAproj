@@ -22,3 +22,13 @@ std::string Person::GetPersonId() const
 {
 	return personId;
 }
+
+void Person::AddCompetion(const std::string& compID)
+{
+	competitionIds.PushFront(compID);
+}
+
+const LinkedList<std::string>& Person::GetCompIds() const
+{
+	return competitionIds;
+}
