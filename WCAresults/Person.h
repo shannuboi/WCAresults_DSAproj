@@ -1,14 +1,15 @@
-
 #include <string>
-class Person{
-    std::string country;
-    std::string name;
-    int personid;
+
+class Person
+{
 public:
-    Person(std::string country, std::string name, int personid){}
-    std::string getcountry() ;
-    std::string getname();
-    int getpersonid();
-    
+    Person(const std::string& in_name, const std::string& in_country, const std::string& in_personId);
+    std::string GetName() const;
+    std::string GetCountry() const;
+    std::string GetPersonId() const;
+private:
+    std::string name;
+    std::string country;
+    std::string personId;
 };
 
