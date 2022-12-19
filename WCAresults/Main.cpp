@@ -1,13 +1,25 @@
-#include "FileParser.h"
+#include "LinkedList.h"
 #include <iostream>
 
 int main()
 {
-	FileParser fp;
-	for (int i = 0; i < 65; i++)
-	{
-		fp.NextLine();
-		std::cout << fp.GetCompetitionId() << ", " << fp.GetPersonName() << ", " << fp.GetRegionalAverageRecord() << "\n";
-	}
+	LinkedList<int> myLL;
 
+	myLL.PushFront(10);
+	myLL.PushFront(22);
+	myLL.PushFront(43);
+	myLL.PushFront(7);
+
+	for (auto Iter = myLL.begin(); Iter != myLL.end();)
+	{
+		std::cout << *Iter << " ";
+		if (*Iter < 10)
+		{
+			*Iter = 69;
+		}
+		else
+		{
+			Iter++;
+		}
+	}
 }
