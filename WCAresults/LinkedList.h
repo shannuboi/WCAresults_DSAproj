@@ -51,6 +51,43 @@ public:
 	private:
 		Node* pNode;
 	};
+	class ConstIterator // Public interface for a Node
+	{
+	public:
+		ConstIterator()
+			:
+			pNode(nullptr)
+		{}
+		ConstIterator(Node* in_pNode)
+			:
+			pNode(in_pNode)
+		{}
+		const datatype& operator*()
+		{
+			return pNode->data;
+		}
+		Iterator& operator++()
+		{
+			pNode = pNode->next;
+			return *this;
+		}
+		Iterator operator++(int)
+		{
+			Iterator nextIter(pNode->next);
+			++(*this);
+			return nextIter;
+		}
+		bool operator==(const Iterator& rhs)
+		{
+			return pNode == rhs.pNode;
+		}
+		bool operator!=(const Iterator& rhs)
+		{
+			return !(*this == rhs);
+		}
+	private:
+		Node* pNode;
+	};
 public:
 	LinkedList()
 		:
@@ -72,6 +109,14 @@ public:
 		return Iterator(head);
 	}
 	Iterator end()
+	{
+		return Iterator();
+	}
+	ConstIterator begin() const
+	{
+		return ConstIterator(head);
+	}
+	ConstIterator end() const
 	{
 		return Iterator();
 	}
