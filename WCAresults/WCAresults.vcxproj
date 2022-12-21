@@ -136,6 +136,7 @@
     <ClCompile Include="Round.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Array.h" />
     <ClInclude Include="Attempt.h" />
     <ClInclude Include="Competition.h" />
     <ClInclude Include="FileParser.h" />
