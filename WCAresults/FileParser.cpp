@@ -4,37 +4,68 @@
 
 FileParser::FileParser(const std::string& fileName)
 	:
-	file(fileName)
+	file(fileName),
+	lineNo(1)
 {
 	assert(file); // Will throw exception if file dosn't open
 	std::string dump;
 	std::getline(file, dump); // First line is column headings
 }
 
-void FileParser::NextLine()
+// returns true only if next line is read successfully
+bool FileParser::NextLine()
 {
 	std::string input;
-	std::getline(file, input);
-	std::stringstream line(input);
-	const char delim = '\t';
+	if (std::getline(file, input))
+	{
+		lineNo++;
+		std::stringstream line(input);
+		const char delim = '\t';
 
-	std::getline(line, competitionId, delim);
-	std::getline(line, eventId, delim);
-	std::getline(line, roundTypeId, delim);
-	std::getline(line, pos, delim);
-	std::getline(line, best, delim);
-	std::getline(line, average, delim);
-	std::getline(line, personName, delim);
-	std::getline(line, personId, delim);
-	std::getline(line, personCountryId, delim);
-	std::getline(line, formatId, delim);
-	std::getline(line, value1, delim);
-	std::getline(line, value2, delim);
-	std::getline(line, value3, delim);
-	std::getline(line, value4, delim);
-	std::getline(line, value5, delim);
-	std::getline(line, regionalSingleRecord, delim);
-	std::getline(line, regionalAverageRecord);
+		std::getline(line, competitionId, delim);
+		std::getline(line, eventId, delim);
+		std::getline(line, roundTypeId, delim);
+		std::getline(line, pos, delim);
+		std::getline(line, best, delim);
+		std::getline(line, average, delim);
+		std::getline(line, personName, delim);
+		std::getline(line, personId, delim);
+		std::getline(line, personCountryId, delim);
+		std::getline(line, formatId, delim);
+		std::getline(line, value1, delim);
+		std::getline(line, value2, delim);
+		std::getline(line, value3, delim);
+		std::getline(line, value4, delim);
+		std::getline(line, value5, delim);
+		std::getline(line, regionalSingleRecord, delim);
+		std::getline(line, regionalAverageRecord);
+
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+int FileParser::LineNo() const
+{
+	return lineNo;
+}
+
+bool FileParser::GoToLine(int in_line_no)
+{
+	file.seekg(std::ios::beg); // Go to beginning of file
+
+	std::string dump;
+	std::getline(file, dump); // First line is column headings
+	lineNo = 1;
+
+	for (int i = 1; i < in_line_no; i++)
+	{
+		if(!NextLine()) return false;
+	}
+	return true;
 }
 
 std::string FileParser::GetCompetitionId() const
