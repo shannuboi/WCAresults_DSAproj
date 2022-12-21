@@ -11,5 +11,5 @@ public:
 private:
     std::string competitionId;
     std::string country;
-    std::vector<Round> Rounds;
+    std::vector<Round> rounds;
 }; 

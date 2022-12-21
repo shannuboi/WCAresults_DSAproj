@@ -11,7 +11,6 @@ Attempt::Attempt(int in_best, int in_average, const std::string& in_personId, in
 	solves[2] = val3;
 	solves[3] = val4;
 	solves[4] = val5;
-
 }
 
 int Attempt::GetBest() const
