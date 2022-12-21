@@ -16,3 +16,8 @@ std::string Round::GetType() const
 {
 	return eventId;
 }
+
+void Round::AddAttempt(const Attempt& attempt)
+{
+	attempts.push_back(attempt);
+}

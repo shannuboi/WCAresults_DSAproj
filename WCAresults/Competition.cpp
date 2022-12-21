@@ -16,3 +16,8 @@ std::string Competition::GetCountry() const
 {
 	return country;
 }
+
+void Competition::AddRound(const Round& round)
+{
+	rounds.push_back(round);
+}
