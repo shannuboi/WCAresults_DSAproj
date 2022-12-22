@@ -1,6 +1,7 @@
 #include "Attempt.h"
 
-Attempt::Attempt(int in_best, int in_average, const std::string& in_personId, int val1, int val2, int val3, int val4, int val5)
+Attempt::Attempt(int in_best, int in_average, const std::string& in_personId,
+	int val1, int val2, int val3, int val4, int val5)
 	:
 	best(in_best),
 	average(in_average),
