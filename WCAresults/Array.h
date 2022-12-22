@@ -22,7 +22,7 @@ Array<type>::Array(int maxCapacity)
     : 
     maxCapacity(maxCapacity)
 {
-    array = new int[maxCapacity];
+    array = new type[maxCapacity];// previously was int[maxCapacity]
     listsize = 0;
 }
 
