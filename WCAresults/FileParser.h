@@ -7,9 +7,12 @@ class FileParser
 {
 public:
 	FileParser(const std::string& fileName = "WCA_Results.txt");
-	void NextLine();
+	bool NextLine();
+	int Line() const;
+	bool GoToLine(int line_no);
 private:
 	std::ifstream file;
+	int lineNo;
 
 public:
 	std::string GetCompetitionId() const;
