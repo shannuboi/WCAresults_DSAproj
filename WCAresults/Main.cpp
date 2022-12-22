@@ -4,13 +4,16 @@
 int main()
 {
 	FileParser fp;
-	for (int i = 2; i <= 65; i++)
+	fp.GoToLine(1);
+	std::cout << fp.Line() << fp.GetCompetitionId() << ", " << fp.GetPersonName() << ", " << fp.GetValue1()
+		<< "\n";
+	for (int i = 2; i <= 5; i++)
 	{
 		fp.NextLine();
-		std::cout << fp.GetCompetitionId() << ", " << fp.GetPersonName() << ", " << fp.GetRegionalAverageRecord() << "\n";
+		std::cout << fp.Line() << fp.GetCompetitionId() << ", " << fp.GetPersonName() << ", " << fp.GetValue1()
+			<< "\n";
 	}
-	int lno = fp.LineNo();
 	fp.GoToLine(7);
-	std::cout << lno;
-	std::cout << fp.GetCompetitionId() << ", " << fp.GetPersonName() << ", " << fp.GetRegionalAverageRecord() << "\n";
+	std::cout << fp.Line() << fp.GetCompetitionId() << ", " << fp.GetPersonName() << ", " << fp.GetValue1()
+		<< "\n";
 }

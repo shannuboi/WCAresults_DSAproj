@@ -48,22 +48,49 @@ bool FileParser::NextLine()
 	}
 }
 
+// First line is lineNo 1 and it corrsponds to the column headings
 int FileParser::Line() const
 {
 	return lineNo;
 }
 
+// First line is lineNo 1 and it corrsponds to the column headings
 bool FileParser::GoToLine(int in_line_no)
 {
 	file.seekg(std::ios::beg); // Go to beginning of file
 
 	std::string dump;
-
 	for (int i = 0; i < in_line_no - 1; i++)
 	{
 		lineNo = i + 1;
 		if(!std::getline(file, dump)) return false;
 	}
+
+	if (in_line_no == 1)
+	{
+		lineNo = 1;
+
+		competitionId = "";
+		eventId = "";
+		roundTypeId = "";
+		pos = "";
+		best = "";
+		average = "";
+		personName = "";
+		personId = "";
+		personCountryId = "";
+		formatId = "";
+		value1 = "";
+		value2 = "";
+		value3 = "";
+		value4 = "";
+		value5 = "";
+		regionalSingleRecord = "";
+		regionalAverageRecord = "";
+
+		return true;
+	}
+
 	return NextLine();
 }
 
