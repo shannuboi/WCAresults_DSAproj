@@ -48,7 +48,7 @@ bool FileParser::NextLine()
 	}
 }
 
-int FileParser::LineNo() const
+int FileParser::Line() const
 {
 	return lineNo;
 }
@@ -58,14 +58,13 @@ bool FileParser::GoToLine(int in_line_no)
 	file.seekg(std::ios::beg); // Go to beginning of file
 
 	std::string dump;
-	std::getline(file, dump); // First line is column headings
-	lineNo = 1;
 
-	for (int i = 1; i < in_line_no; i++)
+	for (int i = 0; i < in_line_no - 1; i++)
 	{
-		if(!NextLine()) return false;
+		lineNo = i + 1;
+		if(!std::getline(file, dump)) return false;
 	}
-	return true;
+	return NextLine();
 }
 
 std::string FileParser::GetCompetitionId() const

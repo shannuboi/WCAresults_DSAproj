@@ -8,7 +8,7 @@ class FileParser
 public:
 	FileParser(const std::string& fileName = "WCA_Results.txt");
 	bool NextLine();
-	int LineNo() const;
+	int Line() const;
 	bool GoToLine(int line_no);
 private:
 	std::ifstream file;
