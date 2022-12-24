@@ -145,6 +145,7 @@
     <ClInclude Include="Person.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="Round.h" />
+    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="WCA_Results.txt" />
