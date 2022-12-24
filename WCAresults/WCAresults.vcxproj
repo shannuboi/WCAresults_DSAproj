@@ -141,6 +141,7 @@
     <ClInclude Include="Competition.h" />
     <ClInclude Include="FileParser.h" />
     <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="Pair.h" />
     <ClInclude Include="Person.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="Round.h" />
