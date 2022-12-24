@@ -1,5 +1,8 @@
 #include <iostream>
 
+namespace my
+{
+
 template <typename type>
 class Array {
 public:
@@ -18,8 +21,8 @@ private:
 };
 
 template<typename type>
-Array<type>::Array(int maxCapacity) 
-    : 
+Array<type>::Array(int maxCapacity)
+    :
     maxCapacity(maxCapacity)
 {
     array = new type[maxCapacity];// previously was int[maxCapacity]
@@ -34,7 +37,7 @@ Array<type>::~Array()
 
 template<typename type>
 bool Array<type>::isEmpty() {
-    return listsize==0;
+    return listsize == 0;
 }
 
 
@@ -46,35 +49,37 @@ bool Array<type>::isFull() {
 
 template<typename type>
 void Array<type>::Delete(type val) {
-    int index{-1};
-    for (int i{0}; i<listsize; i++) {
+    int index{ -1 };
+    for (int i{ 0 }; i < listsize; i++) {
         if (array[i] == val) {
             index = i;
             break;
         }
     }
     if (index == -1) {
-            std::cout << "Value is not in the array" << std::endl;
+        std::cout << "Value is not in the array" << std::endl;
     }
     else {
-        for (int i{index}; i<maxCapacity; i++) {
-            array[i] = array[i+1];              
+        for (int i{ index }; i < maxCapacity; i++) {
+            array[i] = array[i + 1];
         }
         listsize--;
-                        
+
     }
 }
 template<typename type>
 void Array<type>::Pushback(type val) {
-    if (!isFull()){
-        array[listsize++]=val;
+    if (!isFull()) {
+        array[listsize++] = val;
     }
 }
 template<typename type>
 void Array<type>::Print() {
-	int count = 0;
-	while(count != listsize) {
-		std::cout << array[count++] << std::endl;
-			
-	}
+    int count = 0;
+    while (count != listsize) {
+        std::cout << array[count++] << std::endl;
+
+    }
+}
+
 }
