@@ -9,11 +9,11 @@ public:
     std::string GetCountry() const;
     std::string GetPersonId() const;
     void AddCompetion(const std::string& compID);
-    const LinkedList<std::string>& GetCompIds() const;
+    const my::LinkedList<std::string>& GetCompIds() const;
 private:
     std::string name;
     std::string country;
     std::string personId;
-    LinkedList<std::string> competitionIds;
+    my::LinkedList<std::string> competitionIds;
 };
 

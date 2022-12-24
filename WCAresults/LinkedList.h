@@ -1,5 +1,8 @@
 #pragma once
 
+namespace my
+{
+
 template <typename datatype>
 class LinkedList
 {
@@ -7,9 +10,9 @@ private:
 	struct Node
 	{
 		Node()
-			:
-			next(nullptr)
-		{}
+				:
+				next(nullptr)
+			{}
 		datatype data;
 		Node* next;
 	};
@@ -18,36 +21,36 @@ public:
 	{
 	public:
 		Iterator()
-			:
-			pNode(nullptr)
-		{}
+				:
+				pNode(nullptr)
+			{}
 		Iterator(Node* in_pNode)
-			:
-			pNode(in_pNode)
-		{}
+				:
+				pNode(in_pNode)
+			{}
 		datatype& operator*()
-		{
-			return pNode->data;
-		}
+			{
+				return pNode->data;
+			}
 		Iterator& operator++()
-		{
-			pNode = pNode->next;
-			return *this;
-		}
+			{
+				pNode = pNode->next;
+				return *this;
+			}
 		Iterator operator++(int)
-		{
-			Iterator nextIter(pNode->next);
-			++(*this);
-			return nextIter;
-		}
+			{
+				Iterator nextIter(pNode->next);
+				++(*this);
+				return nextIter;
+			}
 		bool operator==(const Iterator& rhs)
-		{
-			return pNode == rhs.pNode;
-		}
+			{
+				return pNode == rhs.pNode;
+			}
 		bool operator!=(const Iterator& rhs)
-		{
-			return !(*this == rhs);
-		}
+			{
+				return !(*this == rhs);
+			}
 	private:
 		Node* pNode;
 	};
@@ -55,80 +58,82 @@ public:
 	{
 	public:
 		ConstIterator()
-			:
-			pNode(nullptr)
-		{}
+				:
+				pNode(nullptr)
+			{}
 		ConstIterator(Node* in_pNode)
-			:
-			pNode(in_pNode)
-		{}
+				:
+				pNode(in_pNode)
+			{}
 		const datatype& operator*()
-		{
-			return pNode->data;
-		}
+			{
+				return pNode->data;
+			}
 		Iterator& operator++()
-		{
-			pNode = pNode->next;
-			return *this;
-		}
+			{
+				pNode = pNode->next;
+				return *this;
+			}
 		Iterator operator++(int)
-		{
-			Iterator nextIter(pNode->next);
-			++(*this);
-			return nextIter;
-		}
+			{
+				Iterator nextIter(pNode->next);
+				++(*this);
+				return nextIter;
+			}
 		bool operator==(const Iterator& rhs)
-		{
-			return pNode == rhs.pNode;
-		}
+			{
+				return pNode == rhs.pNode;
+			}
 		bool operator!=(const Iterator& rhs)
-		{
-			return !(*this == rhs);
-		}
+			{
+				return !(*this == rhs);
+			}
 	private:
 		Node* pNode;
 	};
 public:
 	LinkedList()
-		:
-		head(nullptr)
-	{}
+			:
+			head(nullptr)
+		{}
 	~LinkedList()
-	{
-		DestroyList(head);
-	}
+		{
+			DestroyList(head);
+		}
 	void PushFront(datatype value)
-	{
-		Node* newnode = new Node;
-		newnode->data = value;
-		newnode->next = head;
-		head = newnode;
-	}
+		{
+			Node* newnode = new Node;
+			newnode->data = value;
+			newnode->next = head;
+			head = newnode;
+		}
 	Iterator begin()
-	{
-		return Iterator(head);
-	}
+		{
+			return Iterator(head);
+		}
 	Iterator end()
-	{
-		return Iterator();
-	}
+		{
+			return Iterator();
+		}
 	ConstIterator begin() const
-	{
-		return ConstIterator(head);
-	}
+		{
+			return ConstIterator(head);
+		}
 	ConstIterator end() const
-	{
-		return Iterator();
-	}
+		{
+			return Iterator();
+		}
 private:
 	void DestroyList(Node* n)
-	{
-		if (n->next)
 		{
-			DestroyList(n->next);
+			if (n->next)
+			{
+				DestroyList(n->next);
+			}
+			delete n;
 		}
-		delete n;
-	}
 private:
 	Node* head;
 };
+
+}

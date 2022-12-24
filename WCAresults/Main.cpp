@@ -18,9 +18,9 @@ int main()
 	std::cout << fp.Line() << fp.GetCompetitionId() << ", " << fp.GetPersonName() << ", " << fp.GetValue1()
 		<< "\n";
 
-	Pair<int, std::string> lol = { fp.Line(), fp.GetPersonName() };
-	Pair<int, std::string> lol1 = { 2, fp.GetPersonName() };
-	Pair<int, std::string> lol2 = { fp.Line(), fp.GetPersonName() };
+	my::Pair<int, std::string> lol = { fp.Line(), fp.GetPersonName() };
+	my::Pair<int, std::string> lol1 = { 2, fp.GetPersonName() };
+	my::Pair<int, std::string> lol2 = { fp.Line(), fp.GetPersonName() };
 	if (lol == lol1) std::cout << "OH NOOOO!";
 	if (lol == lol2) std::cout << lol.first << " " << lol.second;
 }
