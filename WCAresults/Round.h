@@ -6,14 +6,12 @@
 class Round
 {
 public:
-    Round(int in_number, const std::string& in_eventId);
-    my::Pair<int, int> GetRoundNum() const;
-    std::string GetType() const;
+    Round(const std::string& in_eventId, const std::string& in_roundType);
+    std::string GetEventType() const;
+    std::string GetRoundType() const;
     void AddAttempt(const Attempt& attempt);
-    void SetTotalRounds(int totrounds);
 private:
-    int number;
-    int totalrounds;
     std::string eventId;
+    std::string roundType;
     std::vector<Attempt> attempts;
 };
