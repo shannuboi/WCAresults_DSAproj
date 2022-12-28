@@ -21,9 +21,6 @@ Program::Program()
 			comps.find(compId)->second.AddRound(round);
 		}
 	}
-
-	fp.GoToLine(2);
-	// Now read player data
 }
 
 bool Program::FillRound(FileParser& fp, Round& round)
@@ -41,11 +38,21 @@ bool Program::FillRound(FileParser& fp, Round& round)
 			std::stoi(fp.GetValue4()),
 			std::stoi(fp.GetValue5()));
 
+		FillCompetatorTable(fp);
+
 		round.AddAttempt(attempt);
 		if (!fp.NextLine()) return false; // exit if endoffile
 		curRound = { fp.GetEventId(), fp.GetRoundTypeId() };
 	}
 	return true;
+}
+
+void Program::FillCompetatorTable(const FileParser & fp)
+{
+	competators.insert({ fp.GetPersonId(),
+		Person(fp.GetPersonName(), fp.GetPersonCountryId(), fp.GetPersonId()) }); // only inserts new competators
+
+	competators.find(fp.GetPersonId())->second.AddCompetion(fp.GetCompetitionId());
 }
 
 
