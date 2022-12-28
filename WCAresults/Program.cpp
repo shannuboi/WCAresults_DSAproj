@@ -1,10 +1,11 @@
 #include "Program.h"
 #include "Pair.h"
 
+// Reads data from FileParser and fills up data structures
 Program::Program()
 {
 	FileParser fp;
-	fp.NextLine();
+	fp.NextLine(); // start at first comp
 
 	bool endOfFile = false;
 	while (!endOfFile)
@@ -23,6 +24,7 @@ Program::Program()
 	}
 }
 
+// Takes a round by refference and adds all attempts of that round into round
 bool Program::FillRound(FileParser& fp, Round& round)
 {
 	const auto compId = fp.GetCompetitionId();
@@ -47,6 +49,7 @@ bool Program::FillRound(FileParser& fp, Round& round)
 	return true;
 }
 
+// If competator is new it is added to hash map
 void Program::FillCompetatorTable(const FileParser & fp)
 {
 	bool newcomp = true;
