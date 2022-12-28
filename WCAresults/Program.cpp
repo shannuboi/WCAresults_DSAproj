@@ -49,10 +49,15 @@ bool Program::FillRound(FileParser& fp, Round& round)
 
 void Program::FillCompetatorTable(const FileParser & fp)
 {
-	competators.insert({ fp.GetPersonId(),
-		Person(fp.GetPersonName(), fp.GetPersonCountryId(), fp.GetPersonId()) }); // only inserts new competators
-
-	competators.find(fp.GetPersonId())->second.AddCompetion(fp.GetCompetitionId());
+	bool newcomp = true;
+	if (!competators.insert({ fp.GetPersonId(),
+		Person(fp.GetPersonName(), fp.GetPersonCountryId(), fp.GetPersonId()) }).second) // if not new competators
+	{
+		auto latestCompId = competators.find(fp.GetPersonId())->second.GetCompIds().begin();
+		newcomp = *latestCompId != fp.GetCompetitionId();
+	}
+	if(newcomp) 
+		competators.find(fp.GetPersonId())->second.AddCompetion(fp.GetCompetitionId());
 }
 
 
