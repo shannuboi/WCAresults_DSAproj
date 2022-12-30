@@ -2,6 +2,8 @@
 #include <assert.h>
 #include <sstream>
 
+// File is opened
+// Line no. is set to 1 meaning curline is column-headings which arent read into variables
 FileParser::FileParser(const std::string& fileName)
 	:
 	file(fileName),
@@ -12,6 +14,7 @@ FileParser::FileParser(const std::string& fileName)
 	std::getline(file, dump); // First line is column headings
 }
 
+// reads data from next file and transfers into member variables
 // returns true only if next line is read successfully
 bool FileParser::NextLine()
 {
@@ -42,25 +45,26 @@ bool FileParser::NextLine()
 
 		return true;
 	}
-	else
-	{
-		return false;
-	}
+	
+	return false;
 }
 
-// First line is lineNo 1 and it corrsponds to the column headings
+// Line number of the currently stored data
+// LineNo starts at 1 and the first line is the column headings
+// Column heading are not saved in member variables, instead they are set to empty strings when lineNo = 1
 int FileParser::Line() const
 {
 	return lineNo;
 }
 
-// First line is lineNo 1 and it corrsponds to the column headings
+// First line is lineNo 1 and it corrsponds to the column headings (member variables cleared)
+// returns true only if line is read successfully
 bool FileParser::GoToLine(int in_line_no)
 {
 	file.seekg(std::ios::beg); // Go to beginning of file
 
 	std::string dump;
-	for (int i = 0; i < in_line_no - 1; i++)
+	for (int i = 0; i < in_line_no - 1; i++) // loop and goes to line just before in_line_no
 	{
 		lineNo = i + 1;
 		if(!std::getline(file, dump)) return false;
@@ -93,6 +97,8 @@ bool FileParser::GoToLine(int in_line_no)
 
 	return NextLine();
 }
+
+// Below are all geters for each column
 
 std::string FileParser::GetCompetitionId() const
 {

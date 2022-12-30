@@ -1,32 +1,24 @@
 #include "Round.h"
 #include <assert.h>
 
-Round::Round(int in_number,const std::string& in_eventId)
+Round::Round(const std::string& in_eventId, const std::string& in_roundType)
 	:
-	number(in_number),
-	totalrounds(-1),
-	eventId(in_eventId)
+	eventId(in_eventId),
+	roundType(in_roundType)
 {
 }
 
-// Returns pair { curRoundNum, TotalRounds }
-my::Pair<int, int> Round::GetRoundNum() const
-{
-	return { number, totalrounds };
-}
-
-std::string Round::GetType() const
+std::string Round::GetEventType() const
 {
 	return eventId;
+}
+
+std::string Round::GetRoundType() const
+{
+	return roundType;
 }
 
 void Round::AddAttempt(const Attempt& attempt)
 {
 	attempts.push_back(attempt);
-}
-
-void Round::SetTotalRounds(int totrounds)
-{
-	assert(totrounds > 0);
-	totalrounds = totalrounds;
 }
