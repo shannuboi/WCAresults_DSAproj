@@ -13,5 +13,5 @@ std::string Competition::GetCompetitionId() const
 
 void Competition::AddRound(const Round& round)
 {
-	rounds.push_back(round);
+	rounds.Pushback(round);
 }

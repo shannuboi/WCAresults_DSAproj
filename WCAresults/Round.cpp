@@ -20,5 +20,5 @@ std::string Round::GetRoundType() const
 
 void Round::AddAttempt(const Attempt& attempt)
 {
-	attempts.push_back(attempt);
+	attempts.Pushback(attempt);
 }
