@@ -17,7 +17,8 @@ private:
 		Node* next;
 	};
 public:
-	class ConstIterator // Public interface for a Node
+	// Public interface for a Node
+	class ConstIterator 
 	{
 	public:
 		ConstIterator()
@@ -54,7 +55,7 @@ public:
 	private:
 		Node* pNode;
 	};
-	class Iterator // Public interface for a Node
+	class Iterator 
 	{
 	public:
 		Iterator()

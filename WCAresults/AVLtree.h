@@ -15,19 +15,66 @@ private:
         Node* lChild;
         Node* rChild;
 
+        // Constructors
+
         Node()
             :
             height(1),
             lChild(nullptr),
             rChild(nullptr)
         {}
+        Node(const type& val)
+            :
+            data(val),
+            height(1),
+            lChild(nullptr),
+            rChild(nullptr)
+        {}
+        Node(const type & val, int height)
+            :
+            data(val),
+            height(height),
+            lChild(nullptr),
+            rChild(nullptr)
+        {}
     };
 
 public:
+    // Constructor
     AVLtree()
         :
         root(nullptr)
     {}
+    // Destructor
+    ~AVLtree()
+    {
+        Destroy(root);
+        root = nullptr;
+    }
+    // DeepCopy constructor
+    AVLtree(const AVLtree& src)
+    {
+        *this = src;
+    }
+    // Move constructor
+    AVLtree(AVLtree&& src)
+    {
+        *this = std::move(src);
+    }
+    // DeepCopy assignment
+    AVLtree& operator=(const AVLtree& rhs)
+    {
+        Destroy(root);
+        root = DeepCopy(rhs.root);
+        return *this;
+    }
+    // Move assignment
+    AVLtree& operator=(AVLtree&& rhs)
+    {
+        root = rhs.root;
+        rhs.root = nullptr;
+        return *this;
+    }
     bool IsEmpty() const
     {
         return root == nullptr;
@@ -38,18 +85,17 @@ public:
     }
     void printInOrder(const Node* start, int num = 0) const
     {
-        if (start)
-        {
-            printInOrder(start->lChild, num + 1);
+        if (!start) return;
 
-            std::cout << "|";
-            for (int i = 0; i < num; i++) std::cout << " ";
-            std::cout << start->data;
-            for (int i = 0; i < num; i++) std::cout << " ";
-            std::cout << "|";
+        printInOrder(start->lChild, num + 1);
 
-            printInOrder(start->rChild, num + 1);
-        }
+        std::cout << "|";
+        for (int i = 0; i < num; i++) std::cout << " ";
+        std::cout << start->data;
+        for (int i = 0; i < num; i++) std::cout << " ";
+        std::cout << "|";
+
+        printInOrder(start->rChild, num + 1);
     }
     const Node* begin() const
     {
@@ -91,9 +137,7 @@ private:
     // recursive insert function
     Node* Insert(Node* node, const type& val) {
         if (node == nullptr) {
-            Node* node = new Node();
-            node->data = val;
-            return node;
+            return (new Node(val));
         }
         if (val <= node->data) {
             node->lChild = Insert(node->lChild, val);
@@ -126,6 +170,25 @@ private:
         }
 
         return node;
+    }
+    // recursive function to destroy a tree
+    void Destroy(Node* start)
+    {
+        if (start == nullptr) return;
+
+        Destroy(start->lChild);
+        Destroy(start->rChild);
+        delete[] start;
+    }
+    // recursive function to copy a tree (returns root node of destination tree)
+    Node* DeepCopy(const Node* src)
+    {
+        if (src == nullptr) return nullptr;
+
+        Node* newnode = new Node(src->data, src->height);
+        newnode->lChild = DeepCopy(src->lChild);
+        newnode->rChild = DeepCopy(src->rChild);
+        return newnode;
     }
 private:
     Node* root;
