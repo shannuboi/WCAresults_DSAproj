@@ -36,7 +36,7 @@ private:
 template<typename type>
 inline Vector<type>::Vector()
     :
-    maxCapacity(16),
+    maxCapacity(0),
     arrayPtr(new type[maxCapacity]),
     listSize(0)
 {
@@ -127,16 +127,12 @@ inline type& Vector<type>::operator[](int index)
 
 template <typename type>
 bool Vector<type>::isEmpty() const {
-    if (listSize == 0) { return true; }
-    else return false;
+    return listSize == 0;
 }
 
 template <typename type>
 bool Vector<type>::isFull() const {
-    if (listSize == maxCapacity) {
-        return true;
-    }
-    else return false;
+    return listSize >= maxCapacity;
 }
 
 template<typename type>
@@ -157,6 +153,8 @@ int Vector<type>::Search(const type& val) const {
 
 template <typename type>
 void Vector<type>::Pushback(const type& val) {
+    if (maxCapacity == 0) ChangeCapacity(16);
+
     arrayPtr[listSize++] = val;
     if (isFull()) {
         ChangeCapacity(maxCapacity * 2);

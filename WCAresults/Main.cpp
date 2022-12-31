@@ -13,7 +13,7 @@ void print(const my::Vector<T>& vec)
 
 int main()
 {
-	my::Vector<int> vec(2);
+	my::Vector<int> vec;
 	std::cout << vec.isEmpty() << std::endl;
 	vec.Pushback(1);
 	print(vec);
