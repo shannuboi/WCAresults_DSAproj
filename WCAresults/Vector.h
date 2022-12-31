@@ -165,7 +165,7 @@ void Vector<type>::Pushback(const type& val) {
 template <typename type>
 void Vector<type>::ChangeCapacity(int newsize) {
     assert(newsize >= 0);
-    int* temp;
+    type* temp;
     temp = arrayPtr;
     arrayPtr = new type[newsize];
 
