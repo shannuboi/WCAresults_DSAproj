@@ -10,9 +10,9 @@ private:
 	struct Node
 	{
 		Node()
-				:
-				next(nullptr)
-			{}
+			:
+			next(nullptr)
+		{}
 		datatype data;
 		Node* next;
 	};
