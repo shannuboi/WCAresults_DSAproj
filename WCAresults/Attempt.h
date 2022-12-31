@@ -1,4 +1,5 @@
 #include <string>
+#include "Array.h"
 
 class Attempt
 {
@@ -12,5 +13,5 @@ private:
     int best;
     int average;
     std::string personID;
-    int solves[5];
+    my::Array<int> solves;
 };

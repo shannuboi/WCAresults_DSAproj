@@ -3,5 +3,5 @@
 
 int main()
 {
-	Program supKhuss;
+	Program p;
 }
