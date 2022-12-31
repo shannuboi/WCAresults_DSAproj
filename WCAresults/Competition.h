@@ -1,6 +1,8 @@
+#pragma once
+
 #include "Round.h"
 #include <string>
-#include <vector>
+#include "Vector.h"
 
 class Competition
 {
@@ -10,5 +12,5 @@ public:
     void AddRound(const Round& round);
 private:
     std::string competitionId;
-    std::vector<Round> rounds;
+    my::Vector<Round> rounds;
 }; 

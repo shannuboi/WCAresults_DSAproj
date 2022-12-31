@@ -1,8 +1,12 @@
+#pragma once
+
 #include <string>
+#include "Array.h"
 
 class Attempt
 {
 public:
+    Attempt();
     Attempt(int in_best, int in_average, const std::string& in_personId,
         int val1, int val2, int val3, int val4, int val5 );
     int GetBest() const;
@@ -12,5 +16,5 @@ private:
     int best;
     int average;
     std::string personID;
-    int solves[5];
+    my::Array<int> solves;
 };
