@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Attempt.h"
 #include "Pair.h"
 #include <string>
