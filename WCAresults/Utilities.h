@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Pair.h"
+#include <iostream>
 
 namespace my
 {

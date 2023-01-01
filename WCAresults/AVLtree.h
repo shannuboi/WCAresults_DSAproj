@@ -1,6 +1,5 @@
 #pragma once
 
-#include <iostream>
 #include "Utilities.h"
 
 namespace my
@@ -38,7 +37,100 @@ private:
             rChild(nullptr)
         {}
     };
-
+public:
+    // Not true iterators (just a public interface for Node)
+    class ConstIterator
+    {
+    public:
+        ConstIterator()
+            :
+            pNode(nullptr)
+        {}
+        ConstIterator(Node* n)
+            :
+            pNode(n)
+        {}
+        const type& operator*() const
+        {
+            return pNode->data;
+        }
+        ConstIterator GetLeftChild() const
+        {
+            return ConstIterator(pNode->lChild);
+        }
+        ConstIterator& LeftChild()
+        {
+            pNode = pNode->lChild;
+            return *this;
+        }
+        ConstIterator GetRightChild() const
+        {
+            return ConstIterator(pNode->rChild);
+        }
+        ConstIterator& RightChild()
+        {
+            pNode = pNode->rChild;
+            return *this;
+        }
+        bool operator==(const ConstIterator& rhs)
+        {
+            return pNode == rhs.pNode;
+        }
+        bool operator!=(const ConstIterator& rhs)
+        {
+            return !(*this == rhs);
+        }
+    private:
+        Node* pNode;
+    };
+    class Iterator
+    {
+    public:
+        Iterator()
+            :
+            pNode(nullptr)
+        {}
+        Iterator(Node* n)
+            :
+            pNode(n)
+        {}
+        type& operator*()
+        {
+            return pNode->data;
+        }
+        Iterator GetLeftChild() const
+        {
+            return Iterator(pNode->lChild);
+        }
+        Iterator& LeftChild()
+        {
+            pNode = pNode->lChild;
+            return *this;
+        }
+        Iterator GetRightChild() const
+        {
+            return Iterator(pNode->rChild);
+        }
+        Iterator& RightChild()
+        {
+            pNode = pNode->rChild;
+            return *this;
+        }
+        bool operator==(const Iterator& rhs)
+        {
+            return pNode == rhs.pNode;
+        }
+        bool operator!=(const Iterator& rhs)
+        {
+            return !(*this == rhs);
+        }
+        operator ConstIterator()
+        {
+            return ConstIterator(pNode);
+        }
+    private:
+        Node* pNode;
+    };
 public:
     // Constructor
     AVLtree()
@@ -83,23 +175,21 @@ public:
     {
         root = Insert(root, value);
     }
-    void printInOrder(const Node* start, int num = 0) const
+    Iterator begin()
     {
-        if (!start) return;
-
-        printInOrder(start->lChild, num + 1);
-
-        std::cout << "|";
-        for (int i = 0; i < num; i++) std::cout << " ";
-        std::cout << start->data;
-        for (int i = 0; i < num; i++) std::cout << " ";
-        std::cout << "|";
-
-        printInOrder(start->rChild, num + 1);
+        return Iterator(root);
     }
-    const Node* begin() const
+    ConstIterator begin() const
     {
-        return root;
+        return ConstIterator(root);
+    }
+    Iterator end()
+    {
+        return Iterator();
+    }
+    ConstIterator end() const
+    {
+        return ConstIterator();
     }
 private:
     int Height(Node* node) {
@@ -193,5 +283,18 @@ private:
 private:
     Node* root;
 };
+
+// Triverses in order and applies Unary predicate to each
+// Unary func must have following prameters: func(type val)
+// BTIterator must have LeftChild() and RightChild() member functions
+template <typename BinaryTreeIterator, class UnaryFunc>
+void InOrderTriversal(BinaryTreeIterator start, BinaryTreeIterator end, UnaryFunc func)
+{
+    if (start == end) return;
+
+    InOrderTriversal(start.GetLeftChild(), end, func);
+    func(*start);
+    InOrderTriversal(start.GetRightChild(), end, func);
+}
 
 }

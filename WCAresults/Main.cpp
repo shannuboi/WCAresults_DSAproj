@@ -1,40 +1,17 @@
 #include "AVLtree.h"
+#include <iostream>
 
 int main()
 {
+	auto printer = [](int val) {
+		std::cout << "|" << val << "|";
+	};
 	my::AVLtree<int> t;
-	t.printInOrder(t.begin()); std::cout << std::endl;
-	t.Insert(2);
-	t.printInOrder(t.begin()); std::cout << std::endl;
-	t.Insert(3);
-	t.printInOrder(t.begin()); std::cout << std::endl;
-	t.Insert(4);
-	t.printInOrder(t.begin()); std::cout << std::endl;
-	t.Insert(6);
-	t.printInOrder(t.begin()); std::cout << std::endl;
-	t.Insert(1);
-	t.printInOrder(t.begin()); std::cout << std::endl;
-	t.Insert(0);
-	t.printInOrder(t.begin()); std::cout << std::endl;
-	t.Insert(-1);
-	t.printInOrder(t.begin()); std::cout << std::endl;
-	t.Insert(-2);
-	t.printInOrder(t.begin()); std::cout << std::endl;
-	t.Insert(-3);
-	t.printInOrder(t.begin()); std::cout << std::endl;
-	t.Insert(-4);
-	t.printInOrder(t.begin()); std::cout << std::endl;
-	t.Insert(-6);
-	t.printInOrder(t.begin()); std::cout << std::endl;
-
-	my::AVLtree<int> tcopy = t;
-	tcopy.Insert(9);
-	t.Insert(2);
-	tcopy.printInOrder(tcopy.begin()); std::cout << std::endl;
-	t.printInOrder(t.begin()); std::cout << std::endl;
-
-	my::AVLtree<int> tmove = std::move(t);
-	t.printInOrder(t.begin()); std::cout << std::endl;
-	tmove.printInOrder(tmove.begin()); std::cout << std::endl;
-
+	my::InOrderTriversal(t.begin(), t.end(), printer); std::cout << std::endl;
+	t.Insert(50);
+	my::InOrderTriversal(t.begin(), t.end(), printer); std::cout << std::endl;
+	t.Insert(51);
+	my::InOrderTriversal(t.begin(), t.end(), printer); std::cout << std::endl;
+	t.Insert(52);
+	my::InOrderTriversal(t.begin(), t.end(), printer); std::cout << std::endl;
 }
