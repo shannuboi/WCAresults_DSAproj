@@ -12,6 +12,7 @@ Program::Program()
 	{
 		const auto compId = fp.GetCompetitionId();
 		comps.insert({ compId, Competition(compId) });
+		AlphabeticalComps.Insert(compId);
 		while (!endOfFile && compId == fp.GetCompetitionId())
 		{
 			Round round(fp.GetEventId(), fp.GetRoundTypeId());
@@ -22,6 +23,59 @@ Program::Program()
 			comps.find(compId)->second.AddRound(round);
 		}
 	}
+}
+
+void Program::Execute()
+{
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << "\t\t\t                   ____        ___   ____                    ____    " << std::endl;
+	std::cout << "\t\t\t \\      /\\      / |     |     |     |    |    /\\      /\\    |    " << std::endl;
+	std::cout << "\t\t\t  \\    /  \\    /  |---- |     |     |    |   /  \\    /  \\   |____" << std::endl;
+	std::cout << "\t\t\t   \\  /    \\  /   |     |     |     |    |  /    \\  /    \\  |    " << std::endl;
+	std::cout << "\t\t\t    \\/      \\/    |____ |____ |___  |____| /      \\/      \\ |____" << std::endl;
+	std::cout << std::endl;
+	std::cout << "\t\t\t\t     _____   ___      ___         ___  " << std::endl;
+	std::cout << "\t\t\t\t       |    |   |    |   | |   | |___| " << std::endl;
+	std::cout << "\t\t\t\t       |    |___|    |___| |___| |   \\" << std::endl;
+	std::cout << std::endl;
+	std::cout << "\t\t\t     _____    _____     ______     _____    _____    _____   _______" << std::endl;
+	std::cout << "\t\t\t    |     |  |     |   |      |      |     |        |           |   " << std::endl;
+	std::cout << "\t\t\t    |_____|  |_____|   |      |      |     |_____   |           |   " << std::endl;
+	std::cout << "\t\t\t    |        |     \\   |      |      |     |        |           |  " << std::endl;
+	std::cout << "\t\t\t    |        |      \\  |______|   ___|     |_____   |_____      |  " << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << "Here are all the Functions you can run" << std::endl;
+	std::cout << "1. Print 10 competitions" << std::endl;
+	std::cout << "2. one function goes here" << std::endl;
+	std::cout << "3. one function goes here" << std::endl;
+	std::cout << "4. one function goes here" << std::endl;
+	std::cout << "5. one function goes here" << std::endl;
+
+	int choice = 0;
+
+	std::cout << "Please enter a number to run respective function" << std::endl;
+	std::cin >> choice;
+
+	switch (choice)
+	{
+	case 1:
+		PrintTenComps();
+	default:
+		std::cout << "\nNot a valid input";
+	}
+}
+
+void Program::PrintTenComps()
+{
+	int i = 0;
+	my::InOrderTriversal(AlphabeticalComps.begin(), AlphabeticalComps.end(),
+		[this, &i](const std::string& id) {
+			if (i++ < 10)
+			comps[id].Print(3);
+		});
 }
 
 // Takes a round by refference and adds all attempts of that round into round
@@ -58,6 +112,10 @@ void Program::FillCompetatorTable(const FileParser & fp)
 	{
 		auto latestCompId = competators.find(fp.GetPersonId())->second.GetCompIds().begin();
 		newcomp = *latestCompId != fp.GetCompetitionId();
+	}
+	else
+	{
+		AlphabeticalCompetators.Insert(fp.GetPersonId());
 	}
 	if(newcomp) 
 		competators.find(fp.GetPersonId())->second.AddCompetion(fp.GetCompetitionId());

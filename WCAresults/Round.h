@@ -12,7 +12,9 @@ public:
     Round(const std::string& in_eventId, const std::string& in_roundType);
     std::string GetEventType() const;
     std::string GetRoundType() const;
+    const my::Vector<Attempt>& GetAttempts() const;
     void AddAttempt(const Attempt& attempt);
+    void Print(int n) const;
 private:
     std::string eventId;
     std::string roundType;

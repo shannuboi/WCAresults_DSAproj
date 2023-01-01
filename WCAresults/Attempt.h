@@ -12,6 +12,8 @@ public:
     int GetBest() const;
     int GetAverage() const;
     std::string GetPersonId() const;
+    const my::Array<int>& GetSolves() const;
+    void Print() const;
 private:
     int best;
     int average;
