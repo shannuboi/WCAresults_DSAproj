@@ -9,6 +9,100 @@ namespace my
 template <typename type>
 class Array {
 public:
+    // Iterators
+    class ConstIterator
+    {
+    public:
+        ConstIterator(type* p)
+            :
+            pData(p)
+        {}
+        const type& operator*() const
+        {
+            return *pData;
+        }
+        ConstIterator& operator++()
+        {
+            pData = pData + 1;
+            return *this;
+        }
+        ConstIterator operator++(int)
+        {
+            ConstIterator temp(pData);
+            pData = pData + 1;
+            return temp;
+        }
+        ConstIterator& operator--()
+        {
+            pData = pData - 1;
+            return *this;
+        }
+        ConstIterator operator--(int)
+        {
+            ConstIterator temp(pData);
+            pData = pData - 1;
+            return temp;
+        }
+        bool operator==(ConstIterator rhs) const
+        {
+            return pData == rhs.pData;
+        }
+        bool operator!=(ConstIterator rhs) const
+        {
+            return !(*this == rhs);
+        }
+    private:
+        type* pData;
+    };
+    class Iterator
+    {
+    public:
+        Iterator(type* p)
+            :
+            pData(p)
+        {}
+        type& operator*()
+        {
+            return *pData;
+        }
+        Iterator& operator++()
+        {
+            pData = pData + 1;
+            return *this;
+        }
+        Iterator operator++(int)
+        {
+            Iterator temp(pData);
+            pData = pData + 1;
+            return temp;
+        }
+        Iterator& operator--()
+        {
+            pData = pData - 1;
+            return *this;
+        }
+        Iterator operator--(int)
+        {
+            Iterator temp(pData);
+            pData = pData - 1;
+            return temp;
+        }
+        bool operator==(Iterator rhs) const
+        {
+            return pData == rhs.pData;
+        }
+        bool operator!=(Iterator rhs) const
+        {
+            return !(*this == rhs);
+        }
+        operator ConstIterator()
+        {
+            return ConstIterator(pData);
+        }
+    private:
+        type* pData;
+    };
+public:
     Array(int maxCapacity);
     ~Array();
     Array(const Array& source);
@@ -19,6 +113,23 @@ public:
     type& operator[](int loc);
     int GetLength() const;
     void Print();
+
+    ConstIterator begin() const
+    {
+        return ConstIterator(arrayPtr);
+    }
+    Iterator begin()
+    {
+        return Iterator(arrayPtr);
+    }
+    ConstIterator end() const
+    {
+        return ConstIterator(arrayPtr + maxCapacity);
+    }
+    Iterator end()
+    {
+        return Iterator(arrayPtr + maxCapacity);
+    }
 private:
     const int maxCapacity;
     type* arrayPtr;
@@ -85,18 +196,18 @@ inline Array<type>& Array<type>::operator=(Array<type>&& rhs)
 
 // Const access
 template<typename type>
-inline const type& Array<type>::operator[](int loc) const
+inline const type& Array<type>::operator[](int index) const
 {
-    assert(loc >= 0 && loc < maxCapacity);
-    return arrayPtr[loc];
+    assert(index >= 0 && index < maxCapacity);
+    return arrayPtr[index];
 }
 
 // Non-const access
 template<typename type>
-inline type& Array<type>::operator[](int loc)
+inline type& Array<type>::operator[](int index)
 {
-    assert(loc >= 0 && loc < maxCapacity);
-    return arrayPtr[loc];
+    assert(index >= 0 && index < maxCapacity);
+    return arrayPtr[index];
 }
 
 template<typename type>
