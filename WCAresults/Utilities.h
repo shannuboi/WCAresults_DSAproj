@@ -1,17 +1,18 @@
 #pragma once
 
 #include "Pair.h"
+#include <iostream>
 
 namespace my
 {
 	template<class type>
-	type& max(type& first, type& second)
+	type max(type first, type second)
 	{
 		return first >= second ? first : second;
 	}
 
 	template<class type>
-	type& min(type& first, type& second)
+	type min(type first, type second)
 	{
 		return first <= second ? first : second;
 	}
