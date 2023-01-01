@@ -198,6 +198,7 @@ inline Array<type>& Array<type>::operator=(Array<type>&& rhs)
 template<typename type>
 inline const type& Array<type>::operator[](int index) const
 {
+
     assert(index >= 0 && index < maxCapacity);
     return arrayPtr[index];
 }
@@ -206,6 +207,7 @@ inline const type& Array<type>::operator[](int index) const
 template<typename type>
 inline type& Array<type>::operator[](int index)
 {
+
     assert(index >= 0 && index < maxCapacity);
     return arrayPtr[index];
 }
