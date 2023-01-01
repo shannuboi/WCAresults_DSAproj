@@ -140,6 +140,7 @@
     <ClInclude Include="Attempt.h" />
     <ClInclude Include="Competition.h" />
     <ClInclude Include="FileParser.h" />
+    <ClInclude Include="Hash.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Pair.h" />
     <ClInclude Include="Person.h" />
