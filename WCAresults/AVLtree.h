@@ -1,11 +1,12 @@
 #pragma once
 
 #include "Utilities.h"
+#include <functional>
 
 namespace my
 {
 
-template <class type>
+template <class type, class Compare = std::less<type> >
 class AVLtree {
 private:
     struct Node {
@@ -229,7 +230,7 @@ private:
         if (node == nullptr) {
             return (new Node(val));
         }
-        if (val <= node->data) {
+        if (comparer(val, node->data)) {
             node->lChild = Insert(node->lChild, val);
         }
         else {
@@ -281,6 +282,7 @@ private:
         return newnode;
     }
 private:
+    Compare comparer;
     Node* root;
 };
 

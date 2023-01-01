@@ -6,7 +6,7 @@ int main()
 	auto printer = [](int val) {
 		std::cout << "|" << val << "|";
 	};
-	my::AVLtree<int> t;
+	my::AVLtree<int, std::greater<int>> t;
 	my::InOrderTriversal(t.begin(), t.end(), printer); std::cout << std::endl;
 	t.Insert(50);
 	my::InOrderTriversal(t.begin(), t.end(), printer); std::cout << std::endl;

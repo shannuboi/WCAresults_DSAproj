@@ -10,8 +10,102 @@ namespace my
 template <typename type>
 class Vector {
 public:
+    // Iterators
+    class ConstIterator
+    {
+    public:
+        ConstIterator(type* p)
+            :
+            pData(p)
+        {}
+        const type& operator*() const
+        {
+            return *pData;
+        }
+        ConstIterator& operator++()
+        {
+            pData = pData + 1;
+            return *this;
+        }
+        ConstIterator operator++(int)
+        {
+            ConstIterator temp(pData);
+            pData = pData + 1;
+            return temp;
+        }
+        ConstIterator& operator--()
+        {
+            pData = pData - 1;
+            return *this;
+        }
+        ConstIterator operator--(int)
+        {
+            ConstIterator temp(pData);
+            pData = pData - 1;
+            return temp;
+        }
+        bool operator==(ConstIterator rhs) const
+        {
+            return pData == rhs.pData;
+        }
+        bool operator!=(ConstIterator rhs) const
+        {
+            return !(*this == rhs);
+        }
+    private:
+        type* pData;
+    };
+    class Iterator
+    {
+    public:
+        Iterator(type* p)
+            :
+            pData(p)
+        {}
+        type& operator*()
+        {
+            return *pData;
+        }
+        Iterator& operator++()
+        {
+            pData = pData + 1;
+            return *this;
+        }
+        Iterator operator++(int)
+        {
+            Iterator temp(pData);
+            pData = pData + 1;
+            return temp;
+        }
+        Iterator& operator--()
+        {
+            pData = pData - 1;
+            return *this;
+        }
+        Iterator operator--(int)
+        {
+            Iterator temp(pData);
+            pData = pData - 1;
+            return temp;
+        }
+        bool operator==(Iterator rhs) const
+        {
+            return pData == rhs.pData;
+        }
+        bool operator!=(Iterator rhs) const
+        {
+            return !(*this == rhs);
+        }
+        operator ConstIterator()
+        {
+            return ConstIterator(pData);
+        }
+    private:
+        type* pData;
+    };
+public:
     Vector();
-    Vector(int maxCapacity);
+    Vector(int size);
     ~Vector();
     Vector(const Vector& src);
     Vector(Vector&& src);
@@ -25,6 +119,27 @@ public:
     int Search(const type&) const;
     void Pushback(const type&);
     void ChangeCapacity(int newsize);
+
+    // Iterators are invalidated if vector is dynamically expanded!
+    ConstIterator begin() const
+    {
+        return ConstIterator(arrayPtr);
+    }
+    // Iterators are invalidated if vector is dynamically expanded!
+    Iterator begin()
+    {
+        return Iterator(arrayPtr);
+    }
+    // Iterators are invalidated if vector is dynamically expanded!
+    ConstIterator end() const
+    {
+        return ConstIterator(arrayPtr + listSize);
+    }
+    // Iterators are invalidated if vector is dynamically expanded!
+    Iterator end()
+    {
+        return Iterator(arrayPtr + listSize);
+    }
 private:
     int maxCapacity;
     type* arrayPtr;
@@ -44,11 +159,11 @@ inline Vector<type>::Vector()
 
 // Constructor
 template <typename type>
-Vector<type>::Vector(int maxCapacity)
+Vector<type>::Vector(int size)
     :
-    maxCapacity(maxCapacity),
+    maxCapacity(size),
     arrayPtr(new type[maxCapacity]),
-    listSize(0)
+    listSize(size)
 {
 }
 
