@@ -12,6 +12,7 @@ Program::Program()
 	{
 		const auto compId = fp.GetCompetitionId();
 		comps.insert({ compId, Competition(compId) });
+		compcount++;
 		while (!endOfFile && compId == fp.GetCompetitionId())
 		{
 			Round round(fp.GetEventId(), fp.GetRoundTypeId());
@@ -22,6 +23,9 @@ Program::Program()
 			comps.find(compId)->second.AddRound(round);
 		}
 	}
+
+	std::cout << "comps: " << compcount << std::endl;
+	std::cout << "players: " << playercount << std::endl;
 }
 
 // Takes a round by refference and adds all attempts of that round into round
@@ -59,8 +63,11 @@ void Program::FillCompetatorTable(const FileParser & fp)
 		auto latestCompId = competators.find(fp.GetPersonId())->second.GetCompIds().begin();
 		newcomp = *latestCompId != fp.GetCompetitionId();
 	}
-	if(newcomp) 
+	if (newcomp)
+	{
 		competators.find(fp.GetPersonId())->second.AddCompetion(fp.GetCompetitionId());
+		playercount++;
+	}
 }
 
 
