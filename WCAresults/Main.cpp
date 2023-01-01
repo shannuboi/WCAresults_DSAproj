@@ -3,7 +3,7 @@
 
 int main()
 {
-	my::Array<int> lol(5);
+	my::Vector<int> lol(5);
 	lol[0] = 10;
 	lol[1] = 110;
 	lol[2] = 100;
