@@ -35,3 +35,24 @@ std::string Attempt::GetPersonId() const
 {
 	return personID;
 }
+
+const my::Array<int>& Attempt::GetSolves() const
+{
+	return solves;
+}
+
+void Attempt::Print() const
+{
+	std::cout << "Player: " << personID << ",  AVG: " << average << ",  BEST: " << best << std::endl;
+	std::cout << "\t\t\t";
+	for (int s : solves)
+	{
+		auto time = std::to_string(s);
+		if (time.length() >= 2)
+			std::cout << time.substr(0, time.length() - 2) << "." << time.substr(time.length() - 2);
+		else
+			std::cout << time;
+		std::cout << "  ";
+	}
+	std::cout << std::endl;
+}

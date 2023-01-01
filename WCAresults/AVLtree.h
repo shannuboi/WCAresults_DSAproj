@@ -269,7 +269,7 @@ private:
 
         Destroy(start->lChild);
         Destroy(start->rChild);
-        delete[] start;
+        delete start;
     }
     // recursive function to copy a tree (returns root node of destination tree)
     Node* DeepCopy(const Node* src)

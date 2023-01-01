@@ -3,5 +3,6 @@
 
 int main()
 {
-	Program p;
+	Program mainProg;
+	mainProg.Execute();
 }
