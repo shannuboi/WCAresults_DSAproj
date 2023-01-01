@@ -98,7 +98,7 @@ inline Array<type>& Array<type>::operator=(Array<type>&& rhs)
 template<typename type>
 inline const type& Array<type>::operator[](int loc) const
 {
-    assert(loc >= 0 && loc < listsize);
+    assert(loc >= 0 && loc < maxCapacity);
     return arrayPtr[loc];
 }
 
@@ -106,7 +106,7 @@ inline const type& Array<type>::operator[](int loc) const
 template<typename type>
 inline type& Array<type>::operator[](int loc)
 {
-    assert(loc >= 0 && loc < listsize);
+    assert(loc >= 0 && loc < maxCapacity);
     return arrayPtr[loc];
 }
 
