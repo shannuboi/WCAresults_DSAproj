@@ -14,11 +14,11 @@ Attempt::Attempt(int in_best, int in_average, const std::string& in_personId,
 	personID(in_personId),
 	solves(5)
 {
-	solves.Pushback(val1);
-	solves.Pushback(val2);
-	solves.Pushback(val3);
-	solves.Pushback(val4);
-	solves.Pushback(val5);
+	solves[0] = val1;
+	solves[1] = val2;
+	solves[2] = val3;
+	solves[3] = val4;
+	solves[4] = val5;
 }
 
 int Attempt::GetBest() const
