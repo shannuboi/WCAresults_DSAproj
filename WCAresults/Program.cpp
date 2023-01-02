@@ -86,21 +86,26 @@ void Program::Execute()
 void Program::PrintTenComps()
 {
 	int i = 0;
-	my::InOrderTriversal(AlphabeticalComps.begin(), AlphabeticalComps.end(),
-		[this, &i](const std::string& id) { // lambda function to that prints comp
-			if (i++ < 10)
-			comps[id].Print(3);
-		});
+	for (const std::string& compID : DateWiseComps)
+	{
+		comps[compID].Print(5);
+		if (++i >= 10) break;
+	}
 }
 
 void Program::PrintTenPlayers()
 {
 	int i = 0;
-	my::InOrderTriversal(AlphabeticalCompetators.begin(), AlphabeticalCompetators.end(),
+	my::InOrderTriversal(AllCompetators.begin(), AllCompetators.end(),
 		[this, &i](const std::string& id) { // lambda function that prints players
 			if (i++ < 10)
 			competators[id].Print(5, 10);
 		});
+}
+
+void Program::PrintPlayersThatWonMoreThenOneComp()
+{
+
 }
 
 // Takes a round by refference and adds all attempts of that round into round
@@ -140,7 +145,7 @@ void Program::FillCompetatorTable(const FileParser & fp)
 	}
 	else
 	{
-		AlphabeticalCompetators.Insert(fp.GetPersonId());
+		AllCompetators.Insert(fp.GetPersonId());
 	}
 
 	if(newcomp) 

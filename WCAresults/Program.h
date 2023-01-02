@@ -15,6 +15,8 @@ public:
 private:
 	void PrintTenComps();
 	void PrintTenPlayers();
+	void PrintPlayersThatWonMoreThenOneComp();
+
 	bool FillRound(FileParser& fp, Round& round);
 	void FillCompetatorTable(const FileParser& fp);
 private:
@@ -23,5 +25,6 @@ private:
 
 	my::AVLtree<std::string> AlphabeticalComps;
 	my::LinkedList<std::string> DateWiseComps;
-	my::AVLtree<std::string> AlphabeticalCompetators;
+
+	my::AVLtree<std::string> AllCompetators;
 };

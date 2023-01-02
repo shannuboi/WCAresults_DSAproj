@@ -25,10 +25,12 @@ void Competition::AddRound(const Round& round)
 void Competition::Print(int n) const
 {
 	std::cout << "Competition: " << competitionId << std::endl;
+	int i = 0;
 	for (const Round& r : rounds)
 	{
 		std::cout << "\t";
 		r.Print(3);
+		if (++i >= n) break;
 	}
 	std::cout << std::endl;
 }

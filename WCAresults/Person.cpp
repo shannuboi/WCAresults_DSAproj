@@ -74,4 +74,5 @@ void Person::Print(int nComps, int nSolves) const
 			}
 		});
 	std::cout << std::endl;
+	std::cout << std::endl;
 }

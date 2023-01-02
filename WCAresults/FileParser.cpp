@@ -157,22 +157,22 @@ std::string FileParser::GetValue1() const
 
 std::string FileParser::GetValue2() const
 {
-	return value1;
+	return value2;
 }
 
 std::string FileParser::GetValue3() const
 {
-	return value1;
+	return value3;
 }
 
 std::string FileParser::GetValue4() const
 {
-	return value1;
+	return value4;
 }
 
 std::string FileParser::GetValue5() const
 {
-	return value1;
+	return value5;
 }
 
 std::string FileParser::GetRegionalSingleRecord() const

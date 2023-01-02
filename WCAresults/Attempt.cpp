@@ -45,9 +45,9 @@ void Attempt::Print() const
 {
 	std::cout << "Player: " << personID << ",  AVG: " << average << ",  BEST: " << best << std::endl;
 	std::cout << "\t\t\t";
-	for (int s : solves)
+	for (int i = 0; i < solves.GetLength(); i++)
 	{
-		auto time = std::to_string(s);
+		auto time = std::to_string(solves[i]);
 		if (time.length() >= 2)
 			std::cout << time.substr(0, time.length() - 2) << "." << time.substr(time.length() - 2);
 		else
