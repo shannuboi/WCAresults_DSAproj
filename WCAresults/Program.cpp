@@ -13,6 +13,8 @@ Program::Program()
 		const auto compId = fp.GetCompetitionId();
 		comps.insert({ compId, Competition(compId) });
 		AlphabeticalComps.Insert(compId);
+		DateWiseComps.PushFront(compId);
+
 		while (!endOfFile && compId == fp.GetCompetitionId())
 		{
 			Round round(fp.GetEventId(), fp.GetRoundTypeId());
@@ -47,24 +49,37 @@ void Program::Execute()
 	std::cout << "\t\t\t    |        |      \\  |______|   ___|     |_____   |_____      |  " << std::endl;
 	std::cout << std::endl;
 	std::cout << std::endl;
-	std::cout << "Here are all the Functions you can run" << std::endl;
-	std::cout << "1. Print 10 competitions" << std::endl;
-	std::cout << "2. one function goes here" << std::endl;
-	std::cout << "3. one function goes here" << std::endl;
-	std::cout << "4. one function goes here" << std::endl;
-	std::cout << "5. one function goes here" << std::endl;
 
-	int choice = 0;
-
-	std::cout << "Please enter a number to run respective function" << std::endl;
-	std::cin >> choice;
-
-	switch (choice)
+	bool running = true;
+	while (running)
 	{
-	case 1:
-		PrintTenComps();
-	default:
-		std::cout << "\nNot a valid input";
+		std::cout << "Here are all the Functions you can run" << std::endl;
+		std::cout << "1. Print 10 competitions" << std::endl;
+		std::cout << "2. Print 10 competators" << std::endl;
+		std::cout << "3. one function goes here" << std::endl;
+		std::cout << "4. one function goes here" << std::endl;
+		std::cout << "5. one function goes here" << std::endl;
+
+		char choice = '0';
+
+		std::cout << "Please enter a number to run respective function (q to exit)" << std::endl;
+		std::cin.get(choice);
+		std::cin.get();
+
+		switch (choice)
+		{
+		case '1':
+			PrintTenComps();
+			break;
+		case '2':
+			PrintTenPlayers();
+			break;
+		case 'q':
+			running = false;
+			break;
+		default:
+			std::cout << "\nNot a valid input\n\n";
+		}
 	}
 }
 
@@ -72,9 +87,19 @@ void Program::PrintTenComps()
 {
 	int i = 0;
 	my::InOrderTriversal(AlphabeticalComps.begin(), AlphabeticalComps.end(),
-		[this, &i](const std::string& id) {
+		[this, &i](const std::string& id) { // lambda function to that prints comp
 			if (i++ < 10)
 			comps[id].Print(3);
+		});
+}
+
+void Program::PrintTenPlayers()
+{
+	int i = 0;
+	my::InOrderTriversal(AlphabeticalCompetators.begin(), AlphabeticalCompetators.end(),
+		[this, &i](const std::string& id) { // lambda function that prints players
+			if (i++ < 10)
+			competators[id].Print(5, 10);
 		});
 }
 
@@ -117,8 +142,18 @@ void Program::FillCompetatorTable(const FileParser & fp)
 	{
 		AlphabeticalCompetators.Insert(fp.GetPersonId());
 	}
+
 	if(newcomp) 
 		competators.find(fp.GetPersonId())->second.AddCompetion(fp.GetCompetitionId());
+
+	if (fp.GetEventId() == "333")
+	{
+		competators.find(fp.GetPersonId())->second.AddSolve(fp.GetValue1());
+		competators.find(fp.GetPersonId())->second.AddSolve(fp.GetValue2());
+		competators.find(fp.GetPersonId())->second.AddSolve(fp.GetValue3());
+		competators.find(fp.GetPersonId())->second.AddSolve(fp.GetValue4());
+		competators.find(fp.GetPersonId())->second.AddSolve(fp.GetValue5());
+	}
 }
 
 

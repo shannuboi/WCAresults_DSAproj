@@ -14,6 +14,7 @@ public:
 	void Execute();
 private:
 	void PrintTenComps();
+	void PrintTenPlayers();
 	bool FillRound(FileParser& fp, Round& round);
 	void FillCompetatorTable(const FileParser& fp);
 private:
@@ -21,6 +22,6 @@ private:
 	std::unordered_map<std::string, Person, my::StringHasher> competators;
 
 	my::AVLtree<std::string> AlphabeticalComps;
-
+	my::LinkedList<std::string> DateWiseComps;
 	my::AVLtree<std::string> AlphabeticalCompetators;
 };

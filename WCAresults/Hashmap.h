@@ -32,7 +32,7 @@ public:
                 return false;
             }
         }
-        hashtable[index].PushBack(Pair<keytype, valuetype>{ key, val });
+        hashtable[index].PushFront(Pair<keytype, valuetype>{ key, val });
         return true;
     }
     // returns pair with first being value and second being bool indicating if key was found

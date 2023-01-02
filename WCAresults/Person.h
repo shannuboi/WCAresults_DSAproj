@@ -2,6 +2,7 @@
 
 #include <string>
 #include "LinkedList.h"
+#include "AVLtree.h"
 
 class Person
 {
@@ -13,10 +14,14 @@ public:
     std::string GetPersonId() const;
     void AddCompetion(const std::string& compID);
     const my::LinkedList<std::string>& GetCompIds() const;
+    void AddSolve(const std::string& solve);
+    const my::AVLtree<int>& GetAll3x3Solves() const;
+    void Print(int nComps, int nSolves) const;
 private:
     std::string name;
     std::string country;
     std::string personId;
     my::LinkedList<std::string> competitionIds;
+    my::AVLtree<int> all3x3Solves;
 };
 
