@@ -18,6 +18,7 @@ private:
 	void PrintTenPlayersThatWonMoreThenOneComp();
 	void PrintTenPlayersThatBeatFeliksZemdegs();
 	void Print10CompsWithSub53x3Solve();
+	void PrintPlayerWithBest3x3OverAllAvg();
 
 	bool FillRound(FileParser& fp, Round& round);
 	void FillCompetatorTable(const FileParser& fp);

@@ -58,6 +58,7 @@ void Program::Execute()
 		std::cout << "3. Print 10 players that won more then one comp" << std::endl;
 		std::cout << "4. Print 10 players that beat feliks zemdegs" << std::endl;
 		std::cout << "5. Print 10 comps with Sub-5 3x3 Solve" << std::endl;
+		std::cout << "6. Print player with best global 3x3 average" << std::endl;
 
 		char choice = '0';
 
@@ -81,6 +82,9 @@ void Program::Execute()
 			break;
 		case '5':
 			Print10CompsWithSub53x3Solve();
+			break;
+		case '6':
+			PrintPlayerWithBest3x3OverAllAvg();
 			break;
 		case 'q':
 			running = false;
@@ -214,6 +218,33 @@ void Program::Print10CompsWithSub53x3Solve()
 				i++;
 			}
 		});
+}
+
+void Program::PrintPlayerWithBest3x3OverAllAvg()
+{
+	std::string PlayerID;
+
+	float minAvg = 1000000.0f;
+	my::InOrderTriversal(AllCompetators.begin(), AllCompetators.end(),
+		[&, this](const std::string& id) {	// lambda function
+			const auto& solves = competators[id].GetAll3x3Solves();
+			int count = 0;
+			int sum = 0;
+			my::InOrderTriversal(solves.begin(), solves.end(),
+				[&](int time) {			//lambda function
+					count++;
+					sum += time;
+				});
+			float avg = float(sum) / float(count);
+			if (avg < minAvg)
+			{
+				PlayerID = id;
+				minAvg = avg;
+			}
+		});
+
+	std::cout << "Overall avg = " << minAvg / 100.0f << std::endl;
+	competators[PlayerID].Print();
 }
 
 // Takes a round by refference and adds all attempts of that round into round
