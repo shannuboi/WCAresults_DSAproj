@@ -47,6 +47,11 @@ const my::AVLtree<int>& Person::GetAll3x3Solves() const
 	return all3x3Solves;
 }
 
+void Person::Print() const
+{
+	Print(competitionIds.GetLength(), all3x3Solves.GetLength());
+}
+
 void Person::Print(int nComps, int nSolves) const
 {
 	std::cout << "Name: " << name << ",  Country: " << country << std::endl;

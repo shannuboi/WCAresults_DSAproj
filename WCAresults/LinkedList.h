@@ -130,10 +130,18 @@ public:
 
 		return *this;
 	}
+	// Deep move
 	LinkedList& operator=(LinkedList<datatype>&& rhs)
 	{
 		head = rhs.head;
 		rhs.head = nullptr;
+	}
+	int GetLength() const
+	{
+		int len = 0;
+		for (auto n : *this) len++;
+
+		return len;
 	}
 	void PushFront(const datatype& value)
 	{

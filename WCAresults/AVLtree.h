@@ -172,6 +172,10 @@ public:
     {
         return root == nullptr;
     }
+    int GetLength() const
+    {
+        return GetLength(root);
+    }
     void Insert(const type& value)
     {
         root = Insert(root, value);
@@ -201,7 +205,11 @@ private:
         if (node == nullptr) return 0;
         return Height(node->lChild) - Height(node->rChild);
     }
-
+    int GetLength(Node* node) const
+    {
+        if (node == nullptr) return 0;
+        return GetLength(node->lChild) + GetLength(node->rChild) + 1;
+    }
     // returns replacement node after rotation
     Node* rotateRight(Node* oldroot) {
         Node* newroot = oldroot->lChild;

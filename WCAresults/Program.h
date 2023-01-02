@@ -15,7 +15,7 @@ public:
 private:
 	void PrintTenComps();
 	void PrintTenPlayers();
-	void PrintPlayersThatWonMoreThenOneComp();
+	void PrintTenPlayersThatWonMoreThenOneComp();
 
 	bool FillRound(FileParser& fp, Round& round);
 	void FillCompetatorTable(const FileParser& fp);

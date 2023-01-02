@@ -16,6 +16,7 @@ public:
     const my::LinkedList<std::string>& GetCompIds() const;
     void AddSolve(const std::string& solve);
     const my::AVLtree<int>& GetAll3x3Solves() const;
+    void Print() const;
     void Print(int nComps, int nSolves) const;
 private:
     std::string name;

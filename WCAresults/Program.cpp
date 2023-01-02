@@ -56,7 +56,7 @@ void Program::Execute()
 		std::cout << "Here are all the Functions you can run" << std::endl;
 		std::cout << "1. Print 10 competitions" << std::endl;
 		std::cout << "2. Print 10 competators" << std::endl;
-		std::cout << "3. one function goes here" << std::endl;
+		std::cout << "3. Print 10 players that won more then one comp" << std::endl;
 		std::cout << "4. one function goes here" << std::endl;
 		std::cout << "5. one function goes here" << std::endl;
 
@@ -73,6 +73,9 @@ void Program::Execute()
 			break;
 		case '2':
 			PrintTenPlayers();
+			break;
+		case '3':
+			PrintTenPlayersThatWonMoreThenOneComp();
 			break;
 		case 'q':
 			running = false;
@@ -103,9 +106,31 @@ void Program::PrintTenPlayers()
 		});
 }
 
-void Program::PrintPlayersThatWonMoreThenOneComp()
+void Program::PrintTenPlayersThatWonMoreThenOneComp()
 {
+	int i = 0;
+	my::InOrderTriversal(AllCompetators.begin(), AllCompetators.end(),
+		[this, &i](const std::string& id) { // lambda function
+			if (i < 10)
+			{
+				const Person& player = competators[id];
+				int count = 0;
+				for (const std::string& compId : player.GetCompIds())
+				{
+					for (const Round& round : comps[compId].GetRounds())
+					{
+						if (round.GetAttempts()[0].GetPersonId() == id)
+							count++;
+					}
+				}
 
+				if (count >= 2)
+				{
+					player.Print();
+					i++;
+				}					
+			}
+		});
 }
 
 // Takes a round by refference and adds all attempts of that round into round
