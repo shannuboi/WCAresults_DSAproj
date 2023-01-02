@@ -144,7 +144,7 @@ void Program::PrintTenPlayersThatWonMoreThenOneComp()
 
 void Program::PrintTenPlayersThatBeatFeliksZemdegs()
 {
-	const Person* feliks;
+	const Person* feliks = nullptr;
 	my::InOrderTriversal(AllCompetators.begin(), AllCompetators.end(),
 		[this, &feliks](const std::string& id) { // lambda function
 			if (competators[id].GetName() == "Feliks Zemdegs")
