@@ -16,6 +16,8 @@ private:
 	void PrintTenComps();
 	void PrintTenPlayers();
 	void PrintTenPlayersThatWonMoreThenOneComp();
+	void PrintTenPlayersThatBeatFeliksZemdegs();
+	void Print10CompsWithSub53x3Solve();
 
 	bool FillRound(FileParser& fp, Round& round);
 	void FillCompetatorTable(const FileParser& fp);
@@ -24,7 +26,6 @@ private:
 	std::unordered_map<std::string, Person, my::StringHasher> competators;
 
 	my::AVLtree<std::string> AlphabeticalComps;
-	my::LinkedList<std::string> DateWiseComps;
 
 	my::AVLtree<std::string> AllCompetators;
 };

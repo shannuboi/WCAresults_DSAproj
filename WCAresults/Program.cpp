@@ -13,7 +13,6 @@ Program::Program()
 		const auto compId = fp.GetCompetitionId();
 		comps.insert({ compId, Competition(compId) });
 		AlphabeticalComps.Insert(compId);
-		DateWiseComps.PushFront(compId);
 
 		while (!endOfFile && compId == fp.GetCompetitionId())
 		{
@@ -57,8 +56,8 @@ void Program::Execute()
 		std::cout << "1. Print 10 competitions" << std::endl;
 		std::cout << "2. Print 10 competators" << std::endl;
 		std::cout << "3. Print 10 players that won more then one comp" << std::endl;
-		std::cout << "4. one function goes here" << std::endl;
-		std::cout << "5. one function goes here" << std::endl;
+		std::cout << "4. Print 10 players that beat feliks zemdegs" << std::endl;
+		std::cout << "5. Print 10 comps with Sub-5 3x3 Solve" << std::endl;
 
 		char choice = '0';
 
@@ -77,6 +76,12 @@ void Program::Execute()
 		case '3':
 			PrintTenPlayersThatWonMoreThenOneComp();
 			break;
+		case '4':
+			PrintTenPlayersThatBeatFeliksZemdegs();
+			break;
+		case '5':
+			Print10CompsWithSub53x3Solve();
+			break;
 		case 'q':
 			running = false;
 			break;
@@ -89,11 +94,11 @@ void Program::Execute()
 void Program::PrintTenComps()
 {
 	int i = 0;
-	for (const std::string& compID : DateWiseComps)
-	{
-		comps[compID].Print(5);
-		if (++i >= 10) break;
-	}
+	my::InOrderTriversal(AlphabeticalComps.begin(), AlphabeticalComps.end(),
+		[this, &i](const std::string& id) { // lambda function that prints comps
+			if (i++ < 10)
+			comps[id].Print(5);
+		});
 }
 
 void Program::PrintTenPlayers()
@@ -129,6 +134,84 @@ void Program::PrintTenPlayersThatWonMoreThenOneComp()
 					player.Print();
 					i++;
 				}					
+			}
+		});
+}
+
+void Program::PrintTenPlayersThatBeatFeliksZemdegs()
+{
+	const Person* feliks;
+	my::InOrderTriversal(AllCompetators.begin(), AllCompetators.end(),
+		[this, &feliks](const std::string& id) { // lambda function
+			if (competators[id].GetName() == "Feliks Zemdegs")
+			{
+				feliks = &competators[id];
+			}				
+		});
+
+	int i = 0;
+	my::Vector<std::string> beatFeliks;
+	for (const std::string& compID : feliks->GetCompIds())
+	{
+		for (const Round& round : comps[compID].GetRounds())
+		{
+			bool hasFeliks = false;
+			int pos = 0;
+			for (const Attempt& attempt : round.GetAttempts())
+			{
+				if (attempt.GetPersonId() == feliks->GetPersonId())
+				{
+					hasFeliks = true;
+					break;
+				}
+				pos++;
+			}
+
+			if (hasFeliks)
+			{
+				for (int index = 0; index < pos; index++)
+				{
+					auto id = round.GetAttempts()[index].GetPersonId();
+					if (beatFeliks.Search(id) == -1)
+					{
+						competators[id].Print();
+						beatFeliks.Pushback(id);
+						if (i++ >= 10) return;
+					}
+				}
+			}
+		}
+	}
+}
+
+void Program::Print10CompsWithSub53x3Solve()
+{
+	int i = 0;
+	my::InOrderTriversal(AlphabeticalComps.begin(), AlphabeticalComps.end(),
+		[this, &i](const std::string& id) { // lambda function
+			if (i >= 10) return;
+
+			bool hasSub5 = false;
+			for (const Round& round : comps[id].GetRounds())
+			{
+				if (round.GetEventType() != "333") continue;
+
+				for (const Attempt& attempt : round.GetAttempts())
+				{
+					if (attempt.GetBest() > 0 && attempt.GetBest() < 500)
+					{
+						hasSub5 = true;
+						break;
+					}
+				}
+
+				if (hasSub5) break;
+			}
+
+			if (hasSub5)
+			{
+				comps[id].Print(10);
+				i++;
 			}
 		});
 }
