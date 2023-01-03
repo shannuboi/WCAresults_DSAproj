@@ -13,6 +13,11 @@ public:
 	Program();
 	void Execute();
 private:
+	bool FillRound(FileParser& fp, Round& round);
+	void FillCompetatorTable(const FileParser& fp);
+
+
+	//////		FUNCTIONS ON DATASET		//////
 	void PrintTenComps();
 	void PrintTenPlayers();
 	void PrintTenPlayersThatWonMoreThenOneComp();
@@ -20,8 +25,7 @@ private:
 	void Print10CompsWithSub53x3Solve();
 	void PrintPlayerWithBest3x3OverAllAvg();
 
-	bool FillRound(FileParser& fp, Round& round);
-	void FillCompetatorTable(const FileParser& fp);
+
 private:
 	std::unordered_map<std::string, Competition, my::StringHasher> comps;
 	std::unordered_map<std::string, Person, my::StringHasher> competators;

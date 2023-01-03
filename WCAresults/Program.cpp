@@ -26,6 +26,7 @@ Program::Program()
 	}
 }
 
+// The main program loop
 void Program::Execute()
 {
 	std::cout << std::endl;
@@ -95,6 +96,17 @@ void Program::Execute()
 	}
 }
 
+
+////////		FUNCTIONS ON DATASET		//////////
+
+// For all compexity the following is what each varible represensts
+// c: No. of comps
+// r: No. of rounds in a comp
+// a: No. of attempts in a round
+// p: No. of competators
+// Also note, for complexities we have assumed that thee functions will print all (not just 10)
+
+// Complexity: O(c*r*a)
 void Program::PrintTenComps()
 {
 	int i = 0;
@@ -105,6 +117,7 @@ void Program::PrintTenComps()
 		});
 }
 
+// Complecity: O(p)
 void Program::PrintTenPlayers()
 {
 	int i = 0;
@@ -115,6 +128,7 @@ void Program::PrintTenPlayers()
 		});
 }
 
+// Complexity: O(p*r)
 void Program::PrintTenPlayersThatWonMoreThenOneComp()
 {
 	int i = 0;
@@ -142,6 +156,7 @@ void Program::PrintTenPlayersThatWonMoreThenOneComp()
 		});
 }
 
+// Complecity: O(p*r*q)
 void Program::PrintTenPlayersThatBeatFeliksZemdegs()
 {
 	const Person* feliks = nullptr;
@@ -188,6 +203,7 @@ void Program::PrintTenPlayersThatBeatFeliksZemdegs()
 	}
 }
 
+// Complecity: O(c*r*a)
 void Program::Print10CompsWithSub53x3Solve()
 {
 	int i = 0;
@@ -220,6 +236,7 @@ void Program::Print10CompsWithSub53x3Solve()
 		});
 }
 
+// Complecity: O(p)
 void Program::PrintPlayerWithBest3x3OverAllAvg()
 {
 	std::string PlayerID;
